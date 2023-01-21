@@ -3,17 +3,14 @@ package com.driver;
 public class F1 extends Car {
 
     public F1(String name, boolean isManual) {
-        super(name,4,0,6,isManual,"type",1);
-
 
         //Use arbitrary values for parameters which are not mentioned
+        super(name,4,2,6,isManual,"Car ",2);
+
     }
 
-
-
     public void accelerate(int rate){
-        int newSpeed = 0; //set the value of new speed by using currentSpeed and rate
-        newSpeed = getCurrentSpeed()+rate;
+        //set the value of new speed by using currentSpeed and rate
         /**
          * speed 0: gear 1
          * speed 1-50: gear 1
@@ -23,21 +20,23 @@ public class F1 extends Car {
          * speed 201-250: gear 5
          * speed more than 250: gear 6
          */
-
-
+        int newSpeed = 0;
+        newSpeed = getCurrentSpeed()+rate; // cars current speed
 
         if(newSpeed == 0) {
             //Stop the car, set gear as 1
-            stop();
+            super.stop();
             setCurrentGear(1);
         }
-        else if(newSpeed >=1 && newSpeed<=50) {
+        //for all other cases, change the gear accordingly  changeSpeed(newSpeed, getCurrentDirection());
+
+        else if(newSpeed > 0 && newSpeed <=50 ) {
             setCurrentSpeed(newSpeed);
-            setCurrentGear(1);
+            setCurrentGear(1); // using setter method to fetch the parents class method
         }
-        else if(newSpeed >=51 && newSpeed<=100) {
-            setCurrentSpeed(newSpeed);
+        else if(newSpeed >= 51 && newSpeed <= 100){
             setCurrentGear(2);
+            setCurrentSpeed(newSpeed);
         }
         else if(newSpeed >=101 && newSpeed<=150) {
             setCurrentSpeed(newSpeed);
@@ -55,9 +54,6 @@ public class F1 extends Car {
             setCurrentSpeed(newSpeed);
             setCurrentGear(6);
         }
-
-        //for all other cases, change the gear accordingly
-
         if(newSpeed > 0) {
             changeSpeed(newSpeed, getCurrentDirection());
         }
